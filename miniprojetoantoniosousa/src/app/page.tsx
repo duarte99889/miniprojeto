@@ -10,14 +10,7 @@ export default function Home() {
             <h1>Novidade</h1>
           </div>
         </section>
-      
-    
       </main>
-      <footer className={styles.footer}>
-        <div>
-            <h1>É o footer</h1>
-        </div>
-      </footer>
     </div>
   );
 }
