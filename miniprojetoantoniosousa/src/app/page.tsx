@@ -1,16 +1,22 @@
-import styles from "./page.module.css";
-
+import Link from "next/link";
 export default function Home() {
+  const posts = [
+    { id: 1, title: "Post 1" },
+    { id: 2, title: "Post 2" },
+    { id: 3, title: "Post 3" },
+  ];
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <div > HEY </div>
-        <section>
-          <div>
-            <h1>Novidade</h1>
-          </div>
-        </section>
-      </main>
+    <div>
+      <h1>Lista de Posts</h1>
+      <ul>
+        {posts.map((post) => (
+          <li key={post.id}>
+            <Link href={`/posts/${post.id}`}>
+              {post.title}
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
