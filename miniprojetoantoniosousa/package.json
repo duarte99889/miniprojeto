@@ -11,6 +11,8 @@
     "test": "jest"
   },
   "dependencies": {
+    "contentful": "^11.1.4",
+    "contentful-management": "^11.35.1",
     "next": "14.2.15",
     "react": "^18",
     "react-dom": "^18"
