@@ -8,16 +8,23 @@ export default function Home() {
   return (
     <div>
       <h1>Lista de Posts</h1>
+      <ol>
+        <li> Teste de prettier</li>
+        <li>mais um teste </li>
+        <li>maais um teste </li>
+        <li> Teste </li>
+        <li> Teste de prettier</li>
+        <li>maais um teste </li>
+        <li> Teste de prettier</li>
+        <li>maais um teste </li>
+      </ol>
       <ul>
         {posts.map((post) => (
           <li key={post.id}>
-            <Link href={`/posts/${post.id}`}>
-              {post.title}
-            </Link>
+            <Link href={`/posts/${post.id}`}>{post.title}</Link>
           </li>
         ))}
       </ul>
     </div>
-    
   );
 }
