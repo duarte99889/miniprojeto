@@ -1,27 +1,33 @@
 import Link from "next/link";
-export default function Home() {
-  const posts = [
-    { id: 1, title: "Post 1" },
-    { id: 2, title: "Post 2" },
-    { id: 3, title: "Post 3" },
-  ];
+import { getPosts } from "./Posts/Posts";  // Função que você já tem para pegar os posts
+
+// Tipagem dos dados do Post
+type Post = {
+  id: string;
+  title: string;
+};
+
+// Função que buscará os dados do Contentful no servidor
+async function fetchPosts() {
+  const entries = await getPosts();
+  return entries.map((entry: any) => ({
+    id: entry.sys.id,  // Contentful usa o campo sys.id para o ID
+    title: entry.fields.title,
+  }));
+}
+
+export default async function Home() {
+  // Faz o fetch dos posts no lado do servidor
+  const posts = await fetchPosts();
+
   return (
     <div>
-      <h1>Lista de Posts</h1>
-      <ol>
-        <li> Teste de prettier</li>
-        <li>mais um teste </li>
-        <li>maais um teste </li>
-        <li> Teste </li>
-        <li> Teste de prettier</li>
-        <li>maais um teste </li>
-        <li> Teste de prettier</li>
-        <li>maais um teste </li>
-      </ol>
       <ul>
         {posts.map((post) => (
           <li key={post.id}>
-            <Link href={`/posts/${post.id}`}>{post.title}</Link>
+            <Link href={`/posts/${post.id}`}>
+              {post.title}
+            </Link>
           </li>
         ))}
       </ul>
