@@ -7,7 +7,6 @@ async function fetchPosts() {
   return entries.map((entry: any) => ({
     id: entry.sys.id,  // Contentful usa o campo sys.id para o ID
     title: entry.fields.title,
-    except: entry.fields.except,
     author: entry.fields.author.fields.name, // Nome do autor
     authorImage: entry.fields.author.fields.picture.fields.file.url, // URL da imagem do autor
     coverImage: entry.fields.coverImage.fields.file.url, // URL da imagem de capa
@@ -25,7 +24,7 @@ export default async function Home() {
           border: '1px solid #ccc', 
           borderRadius: '8px', 
           width: '400px', 
-          height: '500px',
+          height: '100%',
           display: 'flex',
           flexDirection: 'column',
           overflow: 'hidden', 
@@ -39,7 +38,6 @@ export default async function Home() {
             />
             <div style={{ padding: '16px', flexGrow: 1 }}>
               <h2 style={{ fontSize: '1.5em', margin: '0 0 10px' }}>{post.title}</h2>
-              <p style={{ fontSize: '1em', margin: '0 0 10px' }}>{post.except}</p>
             </div>
           </Link>
           <div style={{
