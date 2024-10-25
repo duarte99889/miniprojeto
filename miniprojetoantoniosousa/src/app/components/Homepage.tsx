@@ -5,7 +5,7 @@ import RootLayout from '../layout';
 type Post = {
   fields: {
     title: string;
-    description: string;
+    except: string;
   };
 };
 
@@ -23,7 +23,7 @@ const HomePage = ({ posts }: Props) => {
           {posts.map((post, index) => (
             <li key={index}>
               <h2>{post.fields.title}</h2>
-              <p>{post.fields.description}</p>
+              <p>{post.fields.except}</p>
             </li>
           ))}
         </ul>
