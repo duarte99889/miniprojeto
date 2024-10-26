@@ -23,7 +23,7 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: miniprojetoantoniosousa  # Adiciona esta linha
+        working-directory: miniprojetoantoniosousa
 
       - name: Run ESLint
         run: npx eslint . --ext .js,.jsx,.ts,.tsx
