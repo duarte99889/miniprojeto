@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getPosts } from "./posts/Postas";
+import { getPosts } from "./Postas";
 
 interface Post {
   id: string;

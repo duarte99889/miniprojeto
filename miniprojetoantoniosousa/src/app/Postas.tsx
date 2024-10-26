@@ -1,4 +1,4 @@
-import client from "../lib/client";
+import client from "./lib/client";
 
 interface CoverImage {
   fields: {
