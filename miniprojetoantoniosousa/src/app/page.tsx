@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { getPosts } from "./posts/Posts";
 
-
 // Definição de interface para Post
 interface Post {
   id: string;
