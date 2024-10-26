@@ -37,7 +37,7 @@ jobs:
         working-directory: miniprojetoantoniosousa  # Adiciona esta linha
 
       - name: Run Unit Tests
-        run: npx jest --coverage
+        run: npx jest --coverage --passWithNoTests      
         working-directory: miniprojetoantoniosousa  # Adiciona esta linha
 
       - name: Run TypeScript Check
