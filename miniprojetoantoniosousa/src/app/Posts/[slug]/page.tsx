@@ -29,10 +29,10 @@ export default async function PostPage({ params }: PostPageProps) {
       <h1>{post.title}</h1>
       <p>{post.content}</p>
       <img 
-                src={post.coverImage} 
-                alt={post.title} 
-                style={{ width: '100%', height: 'auto' }} 
-              />
+  src={post.coverImage ?? ''} // Ou uma URL de imagem padrão
+  alt={post.title} 
+  style={{ width: '100%', height: 'auto' }} 
+/>
       
     </div>
   );
