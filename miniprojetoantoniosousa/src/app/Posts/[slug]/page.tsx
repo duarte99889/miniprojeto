@@ -1,4 +1,5 @@
 import { getPostBySlug, getPosts } from "../Posts";
+
 import { notFound } from "next/navigation";
 
 interface PostPageProps {
