@@ -1,11 +1,8 @@
-import { getPostBySlug, getPosts } from '../Posts';
-import { notFound } from 'next/navigation';
+import { getPostBySlug, getPosts } from "../Posts";
+import { notFound } from "next/navigation";
 
 interface PostPageProps {
-  params: { slug: string ;
-    except: string;
-    coverImage: CoverImage
-  };
+  params: { slug: string; except: string; coverImage: CoverImage };
 }
 interface CoverImage {
   fields: {
@@ -29,12 +26,11 @@ export default async function PostPage({ params }: PostPageProps) {
       <h1>{post.title}</h1>
       <h1>aqui</h1>
       <p>{post.content}</p>
-      <img 
-  src={post.coverImage ?? ''} // Ou uma URL de imagem padrão
-  alt={post.title} 
-  style={{ width: '100%', height: 'auto' }} 
-/>
-      
+      <img
+        src={post.coverImage ?? ""} // Ou uma URL de imagem padrão
+        alt={post.title}
+        style={{ width: "100%", height: "auto" }}
+      />
     </div>
   );
 }
@@ -43,7 +39,7 @@ export default async function PostPage({ params }: PostPageProps) {
 export async function generateStaticParams() {
   const posts = await getPosts();
 
-  return posts.map(post => ({
+  return posts.map((post) => ({
     slug: post.slug,
   }));
 }
