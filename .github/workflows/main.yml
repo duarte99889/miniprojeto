@@ -43,3 +43,47 @@ jobs:
       - name: Build Project
         run: npx next build
         working-directory: miniprojetoantoniosousa  # Adiciona esta linha
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '21'
+
+      - name: Change directory
+        run: cd miniprojetoantoniosousa
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: miniprojetoantoniosousa  # Adiciona esta linha
+
+      - name: Run ESLint
+        run: npx eslint . --ext .js,.jsx,.ts,.tsx
+        working-directory: miniprojetoantoniosousa  # Adiciona esta linha
+
+      - name: Check code formatting
+        run: npx prettier --check .
+        working-directory: miniprojetoantoniosousa  # Adiciona esta linha
+
+      - name: Run Unit Tests
+        run: npx jest --coverage --passWithNoTests      
+        working-directory: miniprojetoantoniosousa  # Adiciona esta linha
+
+      - name: Build Project
+        run: npx next build
+        working-directory: miniprojetoantoniosousa  # Adiciona esta linha
+      
+      - name: Deploy Vercel
+        run: npx vercel --prod --token ${{secrets.TOKEN_VERCEL}}
+        env:
+          VERCEL_ORG_ID: ${{secrets.VERCEL_ORG_ID}}
+          VERCEL_PROJECT_ID: ${{secrets.VERCEL_PROJECT_ID}}
+        working-directory: miniprojetoantoniosousa
+
+
