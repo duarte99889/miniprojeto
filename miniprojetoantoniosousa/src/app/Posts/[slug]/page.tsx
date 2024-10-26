@@ -18,7 +18,6 @@ export default async function PostPage({ params }: PostPageProps) {
   const post = await getPostBySlug(params.slug);
 
   if (!post) {
-    // Redireciona para uma página 404 se o post não for encontrado
     notFound();
   }
 
