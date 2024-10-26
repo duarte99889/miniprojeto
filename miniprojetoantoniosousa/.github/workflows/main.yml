@@ -81,10 +81,10 @@ jobs:
 
       - name: Build Project
         run: npx next build
-        working-directory: miniprojetoantoniosousa  # Adiciona esta linha
         env: 
           CONTENTFUL_SPACE_ID: ${{secrets.CONTENTFUL_SPACE_ID}}
           CONTENTFUL_ACCESS_TOKEN: ${{secrets.CONTENTFUL_ACCESS_TOKEN}}
+        working-directory: miniprojetoantoniosousa  # Adiciona esta linha
       
       - name: Deploy Vercel
         run: npx vercel --prod --token ${{secrets.VERCEL_TOKEN}}
