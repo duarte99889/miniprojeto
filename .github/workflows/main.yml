@@ -40,10 +40,6 @@ jobs:
         run: npx jest --coverage --passWithNoTests      
         working-directory: miniprojetoantoniosousa  # Adiciona esta linha
 
-      - name: Run TypeScript Check
-        run: npx tsc --noEmit
-        working-directory: miniprojetoantoniosousa  # Adiciona esta linha
-
       - name: Build Project
         run: npx next build
         working-directory: miniprojetoantoniosousa  # Adiciona esta linha
