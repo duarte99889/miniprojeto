@@ -23,7 +23,7 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: miniprojeto/miniprojetoantoniosousa  # Atualiza para o caminho correto
+        working-directory: miniprojetoantoniosousa  # Atualiza para o caminho correto
 
       - name: Run ESLint
         run: npx eslint . --ext .js,.jsx,.ts,.tsx
