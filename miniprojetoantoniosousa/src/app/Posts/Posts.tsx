@@ -12,6 +12,7 @@ interface CoverImage {
 // Função para buscar todos os posts
 export async function getPosts() {
   const entries = await client.getEntries({ content_type: 'post' });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return entries.items.map((entry: any) => {
     const coverImage = entry.fields.coverImage as CoverImage | undefined; // Tipo específico
     return {
