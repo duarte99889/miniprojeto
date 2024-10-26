@@ -1,13 +1,26 @@
+
 import Link from "next/link";
 import { getPosts } from "./posts/Posts";
 
-async function fetchPosts() {
+// Definição de interface para Post
+interface Post {
+  id: string;
+  title: string;
+  slug: string;
+  except: string;
+  author: string;
+  authorImage: string;
+  coverImage: string;
+}
+
+async function fetchPosts(): Promise<Post[]> {
   const entries = await getPosts();
   console.log("Slugs dos posts:", entries.map(entry => entry.slug));
-  return entries.map((entry: any) => ({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return entries.map((entry: any) => ({ 
     id: entry.id,
     title: entry.title,
-    slug: entry.slug, // Usando o slug
+    slug: entry.slug,
     except: entry.except,
     author: entry.author,
     authorImage: entry.authorImage,
@@ -62,5 +75,3 @@ export default async function Home() {
     </div>
   );
 }
-
-
