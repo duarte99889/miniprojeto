@@ -27,6 +27,7 @@ export default async function PostPage({ params }: PostPageProps) {
   return (
     <div>
       <h1>{post.title}</h1>
+      <h1>aqui</h1>
       <p>{post.content}</p>
       <img 
   src={post.coverImage ?? ''} // Ou uma URL de imagem padrão
