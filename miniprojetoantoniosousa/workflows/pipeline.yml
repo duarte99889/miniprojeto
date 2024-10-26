@@ -21,20 +21,29 @@ jobs:
         with:
           node-version: '21'
 
+      - name: Change directory
+        run: cd miniprojetoantoniosousa
+
       - name: Install dependencies
         run: npm install
+        working-directory: miniprojetoantoniosousa  # Adiciona esta linha
 
       - name: Run ESLint
         run: npx eslint . --ext .js,.jsx,.ts,.tsx
+        working-directory: miniprojetoantoniosousa  # Adiciona esta linha
 
       - name: Check code formatting
         run: npx prettier --check .
+        working-directory: miniprojetoantoniosousa  # Adiciona esta linha
 
       - name: Run Unit Tests
         run: npx jest --coverage
+        working-directory: miniprojetoantoniosousa  # Adiciona esta linha
 
       - name: Run TypeScript Check
         run: npx tsc --noEmit
+        working-directory: miniprojetoantoniosousa  # Adiciona esta linha
 
       - name: Build Project
         run: npx next build
+        working-directory: miniprojetoantoniosousa  # Adiciona esta linha
