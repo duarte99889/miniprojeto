@@ -12,12 +12,13 @@ cache:
 # Job de build
 build:
   stage: build
-  image: node:21 # Usa a imagem oficial do Node.js 21
+  image: node:21  # Usa a imagem oficial do Node.js 21
   script:
     - echo "Check out e configuração do Node.js"
-    - npm install --prefix miniprojetoantoniosousa  # Instala as dependências no diretório específico
-    - npx prettier --check miniprojetoantoniosousa
-    - npx next build --prefix miniprojetoantoniosousa  # Constrói o projeto Next.js
+    - cd miniprojetoantoniosousa  # Navega para o diretório do projeto
+    - npm install  # Instala as dependências no diretório específico
+    - npx prettier --check .  # Verifica a formatação no diretório atual
+    - npx next build  # Constrói o projeto Next.js
   only:
     - main
   artifacts:
