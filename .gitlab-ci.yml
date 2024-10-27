@@ -16,7 +16,7 @@ build:
   script:
     - echo "Check out e configuração do Node.js"
     - npm install --prefix miniprojetoantoniosousa  # Instala as dependências no diretório específico
-    - npx eslint . --ext .js,.jsx,.ts,.tsx --prefix miniprojetoantoniosousa  # Executa o ESLint
+    - npx eslint . --prefix miniprojetoantoniosousa
     - npx prettier --check . --prefix miniprojetoantoniosousa  # Verifica formatação com Prettier
     - npx jest --coverage --passWithNoTests --prefix miniprojetoantoniosousa  # Executa os testes unitários
     - npx next build --prefix miniprojetoantoniosousa  # Constrói o projeto Next.js
