@@ -26,7 +26,7 @@ jobs:
         working-directory: miniprojetoantoniosousa  # Apenas o diretório do projeto Next.js
 
       - name: Run ESLint
-        run: npx eslint .  # Removendo --ext
+        run: npx eslint . --ext .js,.jsx,.ts,.tsx
         working-directory: miniprojetoantoniosousa
 
       - name: Check code formatting
