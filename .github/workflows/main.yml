@@ -59,7 +59,7 @@ jobs:
 
       - name: Deploy to Vercel
         run: npx vercel --prod --token ${{ secrets.VERCEL_TOKEN }}
-        working-directory: miniprojetoantoniosousa  # Garantir que deploy use o mesmo caminho do projeto
+        working-directory: miniprojetoantoniosousa  # Garantir que deploy use o mesmo caminho do 
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
