@@ -33,18 +33,18 @@ deploy:
   stage: deploy
   image: node:21  # Certifique-se de usar uma imagem Node.js para compatibilidade com o Vercel CLI
   script:
-    - echo "Realizando o deploy no Vercel"
-    - npm install --prefix miniprojetoantoniosousa  # Reinstala dependências se necessário
-    - npx vercel --prod --token $VERCEL_TOKEN --prefix miniprojetoantoniosousa  # Deploy para o Vercel
+    - echo "Realização do deploy para o Vercel"
+    - cd miniprojetoantoniosousa
+    - npm install  # Reinstala dependências se necessário
+    - npx vercel --prod --token $VERCEL_TOKEN  # Deploy para o Vercel
   only:
     - main
   dependencies:
     - build
   environment:
     name: production
-    url: https://your-vercel-project-url.com  # Substitua pelo URL do projeto Vercel
+    url: https://miniprojeto-qa66.vercel.app/
 
-# Variáveis de ambiente do GitLab para conteúdo do Vercel e Contentful
 before_script:
   - export VERCEL_ORG_ID=$VERCEL_ORG_ID
   - export VERCEL_PROJECT_ID=$VERCEL_PROJECT_ID
