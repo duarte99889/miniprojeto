@@ -23,7 +23,7 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: miniprojetoantoniosousa
+        working-directory: miniprojetoantoniosousa  # Apenas o diretório do projeto Next.js
 
       - name: Run ESLint
         run: npx eslint . --ext .js,.jsx,.ts,.tsx
@@ -39,13 +39,13 @@ jobs:
 
       - name: Build Project
         run: npx next build
-        working-directory: miniprojetoantoniosousa 
+        working-directory: miniprojetoantoniosousa
         env: 
           CONTENTFUL_SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
           CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
 
   deploy:
-    needs: build  # Garantir que job de build conclua antes do deploy
+    needs: build  # Garantir que o build conclua antes do deploy
     runs-on: ubuntu-latest
 
     steps:
@@ -59,7 +59,7 @@ jobs:
 
       - name: Deploy to Vercel
         run: npx vercel --prod --token ${{ secrets.VERCEL_TOKEN }}
-        working-directory: miniprojeto/miniprojetoantoniosousa
+        working-directory: miniprojetoantoniosousa  # Garantir que deploy use o mesmo caminho do projeto
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
