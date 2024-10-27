@@ -1,49 +1,51 @@
-# This file is a template, and might need editing before it works on your project.
-# This is a sample GitLab CI/CD configuration file that should run without any modifications.
-# It demonstrates a basic 3 stage CI/CD pipeline. Instead of real tests or scripts,
-# it uses echo commands to simulate the pipeline execution.
-#
-# A pipeline is composed of independent jobs that run scripts, grouped into stages.
-# Stages run in sequential order, but jobs within stages run in parallel.
-#
-# For more information, see: https://docs.gitlab.com/ee/ci/yaml/index.html#stages
-#
-# You can copy and paste this template into a new `.gitlab-ci.yml` file.
-# You should not add this template to an existing `.gitlab-ci.yml` file by using the `include:` keyword.
-#
-# To contribute improvements to CI/CD templates, please follow the Development guide at:
-# https://docs.gitlab.com/ee/development/cicd/templates.html
-# This specific template is located at:
-# https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Getting-Started.gitlab-ci.yml
-
-stages:          # List of stages for jobs, and their order of execution
+stages:
   - build
-  - test
   - deploy
 
-build-job:       # This job runs in the build stage, which runs first.
+variables:
+  NODE_ENV: 'production'
+
+cache:
+  paths:
+    - miniprojetoantoniosousa/node_modules/
+
+# Job de build
+build:
   stage: build
+  image: node:21 # Usa a imagem oficial do Node.js 21
   script:
-    - echo "Compiling the code..."
-    - echo "Compile complete."
+    - echo "Check out e configuração do Node.js"
+    - npm install --prefix miniprojetoantoniosousa  # Instala as dependências no diretório específico
+    - npx eslint . --ext .js,.jsx,.ts,.tsx --prefix miniprojetoantoniosousa  # Executa o ESLint
+    - npx prettier --check . --prefix miniprojetoantoniosousa  # Verifica formatação com Prettier
+    - npx jest --coverage --passWithNoTests --prefix miniprojetoantoniosousa  # Executa os testes unitários
+    - npx next build --prefix miniprojetoantoniosousa  # Constrói o projeto Next.js
+  only:
+    - main
+  artifacts:
+    paths:
+      - miniprojetoantoniosousa/.next  # Armazena os arquivos de build para uso posterior
+    expire_in: 1 week  # Opcional: define a duração de retenção dos artefatos
 
-unit-test-job:   # This job runs in the test stage.
-  stage: test    # It only starts when the job in the build stage completes successfully.
+# Job de deploy
+deploy:
+  stage: deploy
+  image: node:21  # Certifique-se de usar uma imagem Node.js para compatibilidade com o Vercel CLI
   script:
-    - echo "Running unit tests... This will take about 60 seconds."
-    - sleep 60
-    - echo "Code coverage is 90%"
+    - echo "Realizando o deploy no Vercel"
+    - npm install --prefix miniprojetoantoniosousa  # Reinstala dependências se necessário
+    - npx vercel --prod --token $VERCEL_TOKEN --prefix miniprojetoantoniosousa  # Deploy para o Vercel
+  only:
+    - main
+  dependencies:
+    - build
+  environment:
+    name: production
+    url: https://your-vercel-project-url.com  # Substitua pelo URL do projeto Vercel
 
-lint-test-job:   # This job also runs in the test stage.
-  stage: test    # It can run at the same time as unit-test-job (in parallel).
-  script:
-    - echo "Linting code... This will take about 10 seconds."
-    - sleep 10
-    - echo "No lint issues found."
-
-deploy-job:      # This job runs in the deploy stage.
-  stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
-  environment: production
-  script:
-    - echo "Deploying application..."
-    - echo "Application successfully deployed."
+# Variáveis de ambiente do GitLab para conteúdo do Vercel e Contentful
+before_script:
+  - export VERCEL_ORG_ID=$VERCEL_ORG_ID
+  - export VERCEL_PROJECT_ID=$VERCEL_PROJECT_ID
+  - export CONTENTFUL_ACCESS_TOKEN=$CONTENTFUL_ACCESS_TOKEN
+  - export CONTENTFUL_SPACE_ID=$CONTENTFUL_SPACE_ID
