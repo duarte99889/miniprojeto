@@ -23,23 +23,23 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: miniprojetoantoniosousa  # Atualiza para o caminho correto
+        working-directory: miniprojeto/miniprojetoantoniosousa
 
       - name: Run ESLint
         run: npx eslint . --ext .js,.jsx,.ts,.tsx
-        working-directory: miniprojetoantoniosousa
+        working-directory: miniprojeto/miniprojetoantoniosousa
 
       - name: Check code formatting
         run: npx prettier --check .
-        working-directory: miniprojetoantoniosousa
+        working-directory: miniprojeto/miniprojetoantoniosousa
 
       - name: Run Unit Tests
         run: npx jest --coverage --passWithNoTests
-        working-directory: miniprojetoantoniosousa
+        working-directory: miniprojeto/miniprojetoantoniosousa
 
       - name: Build Project
         run: npx next build
-        working-directory: miniprojetoantoniosousa
+        working-directory: miniprojeto/miniprojetoantoniosousa
         env: 
           CONTENTFUL_SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
           CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
@@ -57,10 +57,9 @@ jobs:
         with:
           node-version: '21'
 
-
       - name: Deploy to Vercel
         run: npx vercel --prod --token ${{ secrets.VERCEL_TOKEN }}
-        working-directory: miniprojetoantoniosousa
+        working-directory: miniprojeto/miniprojetoantoniosousa
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
